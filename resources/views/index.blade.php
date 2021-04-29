@@ -37,7 +37,7 @@
               <td>{{ $student->address }}</td>
               <td>
                 <a href="#" class="btn btn-sm btn-info">View</a>
-                <a href="#" class="btn btn-sm btn-success">Edit</a>
+                <a href="{{ url('edit_info/'.$student->id) }}" class="btn btn-sm btn-success">Edit</a>
                 <a href="#" class="btn btn-sm btn-danger">Delete</a>
               </td>
            </tr>
