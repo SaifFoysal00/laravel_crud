@@ -69,12 +69,15 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit_info($id)
+    public function edit($id)
     {
        
          $student = DB::table('students')->find($id);
-        dd($student);
          return view('edit',['student' => $student]);
+        //  return view('edit_info'['student' => $student]);
+        
+        // dd($student);
+         
     }
 
     /**
@@ -86,7 +89,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'class_name' => 'required|string',
+            'roll' => 'required|numeric|unique:students,roll,'.$id,
+            'address' => 'required|string',
+        ]);
+        
+        DB::table('students')->where('id',$id)->update(
+          ['name' => $request ->name,'class_name' => $request ->class_name,'roll' => $request ->roll,'address' => $request ->address]
+        );
+        $request->session()->flash('massage','Student updated');
+        return redirect()->back();
     }
 
     /**
@@ -95,8 +109,10 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        DB::table('students')-> where('id',$id)-> delete();
+        $request->session()->flash('massage','Student deleted');
+        return redirect()->back();
     }
 }

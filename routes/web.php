@@ -16,6 +16,8 @@ use App\Http\Controllers\StudentController;
 Route::get('/', [StudentController::class, 'index'])->name('home');
 Route::get('create', [StudentController::class, 'create'])->name('create');
 Route::post('store', [StudentController::class, 'store'])->name('store');
-Route::get('edit_info/{id}', [StudentController::class, 'edit_info'])->name('edit_info');
-// Route::put('update/{id}', [StudentController::class, 'update'])->name('update');
+Route::get('edit/{id}', [StudentController::class, 'edit'])->name('edit');
+Route::put('update/{id}', [StudentController::class, 'update'])->name('update');
+Route::delete('student/{id}', [StudentController::class, 'destroy'])->name('destroy');
+
 
